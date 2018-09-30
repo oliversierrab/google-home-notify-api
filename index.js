@@ -6,7 +6,6 @@ const port = process.env.PORT || 3000;
 
 const app = express();
 
-const myHome = new GoogleHome(device);
 
 app.get('/', (req, res) => {
   res.send('GoogleHome Speak API');
@@ -18,8 +17,8 @@ app.get('/googlehome/api/speak/:text', (req, res) => {
     return res.status(400).send('No text was provided');
   }
 
+  const myHome = new GoogleHome(device);
   text = text.replace(/\+/g, ' ');
-
   myHome.speak(text);
 
   res.status(200).send(text);
